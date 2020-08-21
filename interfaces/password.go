@@ -5,6 +5,18 @@ import (
 	"log"
 )
 
+func ComparePasswords(hashedPwd string, plainPwd string) bool {
+	bytePlain := getBytePassword(plainPwd)
+	byteHash := getBytePassword(hashedPwd)
+	err := bcrypt.CompareHashAndPassword(byteHash, bytePlain)
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+
+	return true
+}
+
 func GeneratePwd(pwd string) string {
 	bytePassword := getBytePassword(pwd)
 	hashed := hashAndSalt(bytePassword)
