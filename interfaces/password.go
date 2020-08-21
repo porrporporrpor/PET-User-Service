@@ -5,6 +5,7 @@ import (
 	"log"
 )
 
+// For Login
 func ComparePasswords(hashedPwd string, plainPwd string) bool {
 	bytePlain := getBytePassword(plainPwd)
 	byteHash := getBytePassword(hashedPwd)
@@ -37,15 +38,3 @@ func hashAndSalt(pwd []byte) string {
 	return string(hashed)
 }
 
-// for login
-func ComparePassword(hashedPwd string, plainPwd []byte) bool{
-	byteHash := []byte(hashedPwd)
-	err := bcrypt.CompareHashAndPassword(byteHash, plainPwd)
-	if err != nil{
-		//passwordMissMatch
-		log.Println(err)
-		return false
-	}
-	return true
-
-}
